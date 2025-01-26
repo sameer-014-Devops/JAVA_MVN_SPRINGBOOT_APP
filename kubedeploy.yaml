@@ -1,37 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: loksai-eta-deploy
+  name: skmirza-jmsbwa-deploy
   labels:
-    app: loksai-eta-deploy-lbl
+    app: skmirza-jmsbwa-deploy-lb01
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: loksai-eta-app
+  replicas: 4
   template:
     metadata:
       labels:
-        app: loksai-eta-app
+        app: skmirza-jmsbwa-app
     spec:
       containers:
-      - name: loksai-eta-container
-        image: loksaieta/sa-mywebapp:latest
+      - name: skmirza-jmsbwa-container
+        image: sameer014/skmirza-jmsvwa-img:latest
         ports:
         - containerPort: 8080
+    selector:
+      matchLabels:
+        app: skmirza-jmsbwa-app
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: loksai-eta-np-service
+  name: skmirza-jmsbwa-np-service
   labels:
-    app: loksai-eta-np-app
+    app: skmirza-jmsbwa-np-app
 spec:
   selector:
-    app: loksai-eta-deploy-lbl
+    app: skmirza-jmsbwa-deploy-lb01
 
   type: NodePort
   ports:
-  - nodePort: 31028
+  - nodePort: 30014
     port: 8080
     targetPort: 8080
