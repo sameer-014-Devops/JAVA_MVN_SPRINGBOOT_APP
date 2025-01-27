@@ -6,6 +6,9 @@ metadata:
     app: skmirza-jmsbwa-deploy-lb01
 spec:
   replicas: 4
+  selector:
+    matchLabels:
+      app: skmirza-jmsbwa-app
   template:
     metadata:
       labels:
@@ -13,12 +16,16 @@ spec:
     spec:
       containers:
       - name: skmirza-jmsbwa-container
-        image: sameer014/skmirza-jmsvwa-img:latest
+        image: sameer014/skmirza-jmsbwa-img:latest
         ports:
         - containerPort: 8080
-    selector:
-      matchLabels:
-        app: skmirza-jmsbwa-app
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
 ---
 apiVersion: v1
 kind: Service
@@ -28,7 +35,7 @@ metadata:
     app: skmirza-jmsbwa-np-app
 spec:
   selector:
-    app: skmirza-jmsbwa-deploy-lb01
+    app: skmirza-jmsbwa-app
 
   type: NodePort
   ports:
