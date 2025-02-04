@@ -5,7 +5,7 @@ metadata:
   labels:
     app: skmirza-jmsbwa-deploy-lb01
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: skmirza-jmsbwa-app
